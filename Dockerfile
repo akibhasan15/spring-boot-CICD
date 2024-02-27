@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-focal
+FROM tomcat:10.1.19-jdk17-temurin-jammy
 WORKDIR /app
 COPY . .
 RUN apt-get update && apt-get install dos2unix
