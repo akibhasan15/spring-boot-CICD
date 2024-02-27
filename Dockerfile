@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jdk-focal
 WORKDIR /app
-#COPY . .
+COPY . .
 RUN apt-get update && apt-get install dos2unix
 COPY mvnw pom.xml ./
 RUN dos2unix -b ./mvnw
