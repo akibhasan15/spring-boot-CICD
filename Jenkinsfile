@@ -15,7 +15,7 @@ pipeline {
        git branch: 'main', url: 'https://github.com/akibhasan15/spring-boot-CICD'
 
                 // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+              //###  sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -50,8 +50,8 @@ pipeline {
                sshagent(credentials: ['k8sCluster']) {
                withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
-                //sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh -o StrictHostKeyChecking=no ${userAtIP} "export IMAGE_TAG=v1.0"'
+                sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
+                sh 'ssh  ${userAtIP} "sed -e 's/v[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/${tag}/g'"'
                // sh 'ssh ${userAtIP} "envsubst < app1.yaml | minikube kubectl apply -f -"'
                // sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
                // sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
