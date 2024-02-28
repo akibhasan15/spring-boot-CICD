@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app1
+  labels:
+    name: spring-app1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-app1
+  template:
+    metadata:
+      name: spring-app1
+      labels:
+        app: spring-app1
+    spec:
+      containers:
+        - name: spring-app1
+          image: akib123/spring-boot:${IMAGE_TAG}
+          imagePullPolicy: Always
+     
