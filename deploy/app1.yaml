@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: spring-app1
-          image: akib123/spring-boot:${IMAGE_TAG}
+          image: akib123/spring-boot:v1.2.1
           imagePullPolicy: Always
      
