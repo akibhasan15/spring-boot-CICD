@@ -24,7 +24,7 @@ pipeline {
         }
 
 
-       stage('Build-and-Push') {
+     /*  stage('Build-and-Push') {
         environment{
                    tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
                }
@@ -37,7 +37,7 @@ pipeline {
                                                                       }
             }
           }
-    }
+    } */
 
 
 //####DEPLOY
