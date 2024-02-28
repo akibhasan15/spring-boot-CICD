@@ -49,9 +49,9 @@ pipeline {
                sshagent(credentials: ['k8sCluster']) {
                withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
-                sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh ${userAtIP} " minikube kubectl apply -f - app1.yaml"'
-                sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
+                sh 'scp ./deploy/app1.yaml ./deploy/service.yaml   ${userAtIP}: '
+                sh 'ssh ${userAtIP} " minikube kubectl apply -f  app1.yaml"'
+                sh 'ssh ${userAtIP} "minikube kubectl  apply -f service.yaml"'
                 sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
 }
 
