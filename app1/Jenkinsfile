@@ -15,7 +15,8 @@ pipeline {
        git branch: 'main', url: 'https://github.com/akibhasan15/spring-boot-CICD'
 
                 // Run Maven on a Unix agent.
-              //###  sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+               sh "cd ./app1 && mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -41,7 +42,7 @@ pipeline {
 
 
 //####DEPLOY
- stage('Deploy') {
+ /*stage('Deploy') {
            environment{
                              tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
                          }
@@ -61,7 +62,7 @@ pipeline {
 
     }
             }
-    }
+    }*/
 //######DEPLOY-ENDED-HERE
 
 
