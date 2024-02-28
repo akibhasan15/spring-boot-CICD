@@ -51,7 +51,7 @@ pipeline {
                withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
                 sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh  ${userAtIP} "sed -e 's/v[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/${tag}/g'"'
+                sh 'ssh  ${userAtIP} "sed -e `s/v[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/${tag}/g`"'
                // sh 'ssh ${userAtIP} "envsubst < app1.yaml | minikube kubectl apply -f -"'
                // sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
                // sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
