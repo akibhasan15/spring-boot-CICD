@@ -28,17 +28,43 @@ pipeline {
         environment{
                    tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
                }
-        steps{
-
-
+    steps{
      script{
 
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
         docker.build("akib123/spring-boot:${tag}","-f ./Dockerfile ./").push()
 
-        }
+                                                                      }
+            }
+          }
     }
 
-        }
+
+#####DEPLOY
+ stage('Deploy') {
+           environment{
+                             tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
+                         }
+            steps{
+
+               sshagent(credentials: ['k8sCluster']) {
+               withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
+
+                sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
+                sh 'ssh ${userAtIP} "export IMAGE_TAG=${tag} "'
+                sh 'ssh ${userAtIP} "envsubst < app1.yaml | minikube kubectl apply -f -"'
+                sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
+                sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
+}
+
+
+
     }
-}}
+            }
+    }
+######DEPLOY-ENDED-HERE
+
+
+}
+
+}
