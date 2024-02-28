@@ -7,7 +7,7 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
    Jenkins file path: ./app1/Jenkinsfile
    Branch: main
 4. Add Credentials in Jenkins
-
+`
 ##SSH Username and Private Key of the K8s cluster 
 >Manage Jenkins>Manage Jenkins> Credentials > Add Credentials > Select Below Options:
 >Kind: SSH Username with private key
@@ -41,3 +41,4 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 
 ##Access the app through nginx reverse proxy:
 >$ curl nodeip:30030/app1 (for instance, curl 192.168.49.1:30030/app1)
+`
