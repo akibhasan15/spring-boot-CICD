@@ -40,7 +40,7 @@ pipeline {
     }
 
 
-#####DEPLOY
+//####DEPLOY
  stage('Deploy') {
            environment{
                              tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
@@ -62,7 +62,7 @@ pipeline {
     }
             }
     }
-######DEPLOY-ENDED-HERE
+//######DEPLOY-ENDED-HERE
 
 
 }
