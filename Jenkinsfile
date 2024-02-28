@@ -50,11 +50,11 @@ pipeline {
                sshagent(credentials: ['k8sCluster']) {
                withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
-                sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh ${userAtIP} "export IMAGE_TAG=${tag} "'
-                sh 'ssh ${userAtIP} "envsubst < app1.yaml | minikube kubectl apply -f -"'
-                sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
-                sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
+                //sh 'scp ./deploy/app1.yaml .deploy/service.yaml   ${userAtIP}: '
+                sh 'ssh  ${userAtIP} "export IMAGE_TAG=v1.0"'
+               // sh 'ssh ${userAtIP} "envsubst < app1.yaml | minikube kubectl apply -f -"'
+               // sh 'ssh ${userAtIP} "minikube kubectl -- apply -f service.yaml"'
+               // sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
 }
 
 
