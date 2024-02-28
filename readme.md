@@ -10,7 +10,9 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 `
 ##SSH Username and Private Key of the K8s cluster 
 >Manage Jenkins>Manage Jenkins> Credentials > Add Credentials > Select Below Options:
+>
 >Kind: SSH Username with private key
+>
 >Scope: Global
 >ID:k8sCluste
 >Description: Kubernetes cluter server private key and username.
