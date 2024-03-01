@@ -33,7 +33,7 @@ pipeline {
      script{
 
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-        docker.build("akib123/spring-boot:test1.0","-f ./app1/Dockerfile ./app1/").push() 
+        docker.build("akib123/spring-boot:test1.0","-f ./app1/Dockerfile ./app1/") //.push() 
 
                                                                       }
             }
