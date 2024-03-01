@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Get the code from a GitHub repository
 
-       git branch: 'main', url: 'https://github.com/akibhasan15/spring-boot-CICD'
+      // git branch: 'main', url: 'https://github.com/akibhasan15/spring-boot-CICD'
 
                 // Run Maven on a Unix agent.
 
