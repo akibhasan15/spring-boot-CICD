@@ -33,14 +33,14 @@ pipeline {
      script{
 
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-        docker.build("akib123/spring-boot:${tag}","-f ./app1/Dockerfile ./app1/").push()
+        docker.build("akib123/spring-boot:${tag}","-f ./app1/Dockerfile ./app1/") //.push() 
 
                                                                       }
             }
           }
     }
 
- stage('Deploy') {
+/* stage('Deploy') {
            environment{
                              tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
                          }
@@ -59,7 +59,7 @@ pipeline {
 
     }
             }
-    }
+    } */
 
 
 
