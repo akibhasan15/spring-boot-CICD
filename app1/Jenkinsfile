@@ -18,7 +18,7 @@ pipeline {
 
                sh "cd ./app1 && mvn -Dmaven.test.failure.ignore=true clean package"
 
-                // To run Maven on a Windows agent, use
+                // To run Maven on a Windows agent,
                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
 
