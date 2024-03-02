@@ -47,7 +47,7 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 >
 >Scope: Global
 >
->Secret: UserName@Kubernetes-Server-IP (For Instance, myusername@10.10.10.10)
+>Secret: UserName@Kubernetes-Server-IP (UserName@Kubernetes-Server-IP-test)
 >
 >ID: USER-KubeServer (USER-KubeServer-test for test environment)
 >
@@ -60,6 +60,7 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 
 ##Access the app through nginx reverse proxy:
 PRODUCTION ENVIRONMENT
->$ curl nodeip:30030/app1 (for instance, curl 192.168.49.1:30030/app1)
+>$ curl nodeip:30049/app1 (in production environment host)
 TEST ENVIRONMENT
->$ curl nodeip:30030/app1
+>$ curl nodeip:30049/app1 (in test environment host)
+>$ curl 192.168.49.1:30049/app1
