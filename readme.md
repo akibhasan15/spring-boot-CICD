@@ -3,9 +3,9 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 ##Jenkins Environment:
 1. Download Plugins: Docker Pipeline Plugin, SSH-agent and Docker Build plugin.
 2. Setup Maven and JDK-17.
-3. Create new pipeline, enable poll SCM for automatic build, test and, deployment whenever a commit made on this repo.
+3. Create new pipeline, enable poll SCM for automatic build, test and, deployment whenever a commit made on these two repo.
    Jenkins file path: ./app1/Jenkinsfile
-   Branch: main
+   Branch: main,test
 4. Add Credentials in Jenkins
 
 ##SSH Username and Private Key of the K8s cluster 
