@@ -61,7 +61,10 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 
 ##Access the app through nginx reverse proxy:
 >>PRODUCTION ENVIRONMENT
+>
 >$ curl nodeip:30049/app1 (in production environment host)
 >>TEST ENVIRONMENT
+>
 >$ curl nodeip:30049/app1 (in test environment host)
+>
 for instance, >$ curl 192.168.49.1:30049/app1
