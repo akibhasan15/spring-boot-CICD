@@ -44,8 +44,8 @@ pipeline {
                withCredentials([string(credentialsId: 'USER-KubeServer-test', variable: 'userAtIP')]) {
 
                  sh 'scp ./deploy/app1.yaml ./deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh ${userAtIP} "kubectl --namespace=test apply -f  app1.yaml"'
-                sh 'ssh ${userAtIP} "kubectl --namespace=test apply -f service.yaml"'
+                sh 'ssh ${userAtIP} "kubectl  apply -f  app1.yaml"'
+                sh 'ssh ${userAtIP} "kubectl  apply -f service.yaml"'
                 sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
                 
 }
@@ -61,8 +61,8 @@ pipeline {
                withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
                 sh 'scp ./deploy/app1.yaml ./deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh ${userAtIP} "kubectl --namespace=production apply -f  app1.yaml"'
-                sh 'ssh ${userAtIP} "kubectl --namespace=production apply -f service.yaml"'
+                sh 'ssh ${userAtIP} "kubectl  apply -f  app1.yaml"'
+                sh 'ssh ${userAtIP} "kubectl apply -f service.yaml"'
                 sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
                 
 }
