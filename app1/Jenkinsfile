@@ -7,25 +7,20 @@ pipeline {
         jdk "JDK17"
     }
 
-    stages {
-        stage('Test') {
+   stages {
+      stage('Test') {
             steps {
-                // Get the code from a GitHub repository
-
-      // git branch: 'main', url: 'https://github.com/akibhasan15/spring-boot-CICD'
-
-                // Run Maven on a Unix agent.
-
+             
                sh "cd ./app1 && mvn -Dmaven.test.failure.ignore=true clean package"
 
-                // To run Maven on a Windows agent,
+                // To run Maven on a Windows agent, use
                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
 
         }
 
 
-      stage('Build-and-Push') {
+         stage('Build-and-Push') {
         environment{
                    tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
                }
@@ -33,36 +28,45 @@ pipeline {
      script{
 
         withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-        docker.build("akib123/spring-boot:${tag}","-f ./app1/Dockerfile ./app1/") //.push() 
+        docker.build("akib123/spring-boot:${tag}","-f ./app1/Dockerfile ./app1/").push() 
 
                                                                       }
             }
           }
-    }
-
-/* stage('Deploy') {
-           environment{
-                             tag = sh(script: 'git describe --abbrev=0', returnStdout: true).trim()
-                         }
+    }  
+ stage('Deploy-to-Test') {
+         when {
+         
+             expression{env.GIT_BRANCH=="origin/test"}
+         }
             steps{
+               sshagent(credentials: ['k8sCluster']) {
+               withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
+                 sh 'scp ./deploy/app1.yaml ./deploy/service.yaml   ${userAtIP}: '
+                sh 'ssh ${userAtIP} "kubectl --namespace=test apply -f  app1.yaml"'
+                sh 'ssh ${userAtIP} "kubectl --namespace=test apply -f service.yaml"'
+                sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
+                
+}
+    }
+            }
+    } 
+ stage('Deploy-to-Production') {
+         when {
+            expression{env.GIT_BRANCH=="origin/main"}
+         }
+            steps{
                sshagent(credentials: ['k8sCluster']) {
                withCredentials([string(credentialsId: 'USER-KubeServer', variable: 'userAtIP')]) {
 
                 sh 'scp ./deploy/app1.yaml ./deploy/service.yaml   ${userAtIP}: '
-                sh 'ssh ${userAtIP} "kubectl apply -f  app1.yaml"'
-                sh 'ssh ${userAtIP} "kubectl  apply -f service.yaml"'
+                sh 'ssh ${userAtIP} "kubectl --namespace=production apply -f  app1.yaml"'
+                sh 'ssh ${userAtIP} "kubectl --namespace=production apply -f service.yaml"'
                 sh 'ssh ${userAtIP} "rm ./app1.yaml ./service.yaml"'
+                
 }
-
-
-
     }
             }
-    } */
-
-
-
-}
-
-}
+    } 
+        
