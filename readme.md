@@ -47,7 +47,7 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 >
 >Scope: Global
 >
->Secret: UserName@Kubernetes-Server-IP (UserName@Kubernetes-Server-IP-test)
+>Secret: UserName@Kubernetes-Server-IP 
 >
 >ID: USER-KubeServer (USER-KubeServer-test for test environment)
 >
@@ -56,11 +56,12 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 #Kubernetes Cluster Configuration:
 1.Cretae TWO K8s cluster for production and test environment.
 2. Turn off the strict host checking (Or, it won't let you login) for both cluster.
-2. Deploy all the  yaml in the directory of nginx in both namespaces (after the deployment)
+3. Deploy all the  yaml in the directory of nginx in both namespaces (after the deployment)
+4. Nginx Proxy serves at port 30049.
 
 ##Access the app through nginx reverse proxy:
-PRODUCTION ENVIRONMENT
+#PRODUCTION ENVIRONMENT
 >$ curl nodeip:30049/app1 (in production environment host)
-TEST ENVIRONMENT
+#TEST ENVIRONMENT
 >$ curl nodeip:30049/app1 (in test environment host)
->$ curl 192.168.49.1:30049/app1
+for instance, >$ curl 192.168.49.1:30049/app1
