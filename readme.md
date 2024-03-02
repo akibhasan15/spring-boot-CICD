@@ -54,7 +54,7 @@ Spring-Boot deployment using tomcat in a kubernetes cluster.
 >Description: UserName@KuAberntes-Server-IP as secret text
 
 #Kubernetes Cluster Configuration:
-1.Cretae TWO K8s cluster for production and test environment.
+1. Cretae TWO K8s cluster for production and test environment.
 2. Turn off the strict host checking (Or, it won't let you login) for both cluster.
 3. Deploy all the  yaml in the directory of nginx in both namespaces (after the deployment)
 4. Nginx Proxy serves at port 30049. 
